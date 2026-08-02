@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="附件批量下载边栏插件使用指南" />
+    <title>附件批量下载使用指南</title>
+    <style>
+      :root {
+        color: #172033;
+        background: #f4faf9;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(145deg, #f1fbf7 0%, #f5faff 55%, #fffaf1 100%);
+      }
+
+      a { color: inherit; }
+
+      .page {
+        width: min(720px, 100%);
+        margin: 0 auto;
+        padding: 16px 14px 40px;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 28px 24px;
+        border-radius: 14px;
+        color: #fff;
+        background:
+          linear-gradient(95deg, rgba(15, 160, 111, .96), rgba(10, 121, 144, .88) 55%, rgba(35, 92, 166, .78)),
+          url("./firefly-batch-hero-bg.png") center / cover no-repeat;
+        box-shadow: 0 12px 32px rgba(29, 111, 134, .22);
+      }
+
+      .hero h1 {
+        margin: 0 0 8px;
+        font-size: clamp(28px, 6vw, 40px);
+        line-height: 1.15;
+      }
+
+      .hero p {
+        max-width: 540px;
+        margin: 0;
+        color: rgba(255, 255, 255, .9);
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 9px 14px;
+        border: 1px solid rgba(255, 255, 255, .35);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .15);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        border-color: #fff;
+        background: #fff;
+        color: #087f72;
+      }
+
+      .card {
+        margin-top: 14px;
+        padding: 22px;
+        border: 1px solid #dfe9e8;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .92);
+        box-shadow: 0 6px 20px rgba(33, 80, 89, .06);
+      }
+
+      .card h2 {
+        margin: 0 0 14px;
+        font-size: 20px;
+      }
+
+      .steps {
+        display: grid;
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: guide-step;
+      }
+
+      .steps li {
+        position: relative;
+        padding-left: 44px;
+        line-height: 1.65;
+        counter-increment: guide-step;
+      }
+
+      .steps li::before {
+        content: counter(guide-step);
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        border-radius: 9px;
+        background: #e8faf3;
+        color: #087f72;
+        font-weight: 800;
+      }
+
+      .steps strong { display: block; margin-bottom: 2px; }
+      .steps p { margin: 0; color: #5b6473; }
+
+      .price-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .price-item {
+        padding: 16px;
+        border-radius: 10px;
+        background: #f5f8fa;
+      }
+
+      .price-item.paid {
+        border: 1px solid #b8e8d7;
+        background: #effaf6;
+      }
+
+      .price-item strong { display: block; margin-bottom: 6px; font-size: 16px; }
+      .price-item p, .note, .footer { margin: 0; color: #606977; line-height: 1.65; }
+      .note { margin-top: 14px; font-size: 13px; }
+      .footer { padding: 20px 4px 0; text-align: center; font-size: 13px; }
+
+      @media (max-width: 520px) {
+        .page { padding: 10px 10px 30px; }
+        .hero, .card { padding: 18px; border-radius: 11px; }
+        .price-grid { grid-template-columns: 1fr; }
+        .button { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <h1>附件批量下载</h1>
+        <p>从多维表格一次选取多个附件字段，统一打包、自动命名，减少逐个打开和保存的重复操作。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://firefly.qwjxqn.xyz" target="_blank" rel="noreferrer">去 Firefly 注册，领取 200 积分</a>
+          <a class="button" href="https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690" target="_blank" rel="noreferrer">联系我们</a>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>四步完成下载</h2>
+        <ol class="steps">
+          <li>
+            <strong>注册 Firefly 并获取 API Key</strong>
+            <p>新用户注册即送 200 积分。进入 Firefly 的 API Key 页面创建账户钥匙。</p>
+          </li>
+          <li>
+            <strong>完成插件设置</strong>
+            <p>回到插件，点击“下载准备”右侧的设置按钮，粘贴 API Key 后完成设置。只有主动勾选时才会在当前浏览器记住 Key。</p>
+          </li>
+          <li>
+            <strong>选择要下载的内容</strong>
+            <p>选择数据表、视图、附件字段和记录范围；需要整理文件时，可设置命名方式和分组方式。</p>
+          </li>
+          <li>
+            <strong>开始下载</strong>
+            <p>选择 ZIP 下载可将多个字段一键打包；也可以选择直接下载原文件。</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h2>下载费用</h2>
+        <div class="price-grid">
+          <div class="price-item paid">
+            <strong>ZIP 下载：10 积分 / 次</strong>
+            <p>每次执行 ZIP 打包下载，消耗 10 Firefly 积分。</p>
+          </div>
+          <div class="price-item">
+            <strong>直接下载：免费</strong>
+            <p>直接下载原文件不消耗 Firefly 积分。</p>
+          </div>
+        </div>
+        <p class="note">说明：空任务不会发起扣费。ZIP 打包时，如浏览器无法直接读取附件，会由 Firefly 转发服务即时取回文件并在响应后丢弃；Firefly 计费仅记录用量，不保存附件内容。</p>
+      </section>
+
+      <p class="footer">如果有问题，可以联系我们，我们会及时优化。</p>
+    </main>
+  </body>
+</html>
